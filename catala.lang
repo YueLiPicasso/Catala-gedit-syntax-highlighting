@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<language id="catala" name="Catala" version="2.0" _section="Source">
+
+  <metadata>
+    <property name="mimetypes">text/x-catala</property>
+    <property name="globs">*.catala_en</property>
+  </metadata>
+
+  <styles>
+    <style id="keyword-decl" name="Declaration" map-to="def:constant"/>
+    <style id="keyword-rule" name="Rule"        map-to="def:type"/>
+    <style id="keyword-expr" name="Expression"  map-to="def:keyword"/>
+    <style id="comment"      name="Comment"     map-to="def:special-char"/>
+    <style id="primitive"    name="Primitive"   map-to="def:preprocessor"/>
+    <style id="sc_id"        name="Snake-case"  map-to="def:identifier"/>
+    <style id="cc_id"        name="Camel-case"  map-to="def:comment"/>
+  </styles>
+  
+  <definitions>
+  
+    <context id="codeblock">
+      <start>```catala-metadata|```catala</start>
+      <end>```</end>
+      <include>
+	<context ref="comment"/>
+	<context ref="keyword-decl"/>
+	<context ref="keyword-rule"/>
+	<context ref="keyword-expr"/>
+	<context ref="primitive"/>
+	<context ref="operator"/>
+	<context ref="sc_id"/>
+	<context ref="cc_id"/>
+      </include>
+    </context>
+
+    <context id="comment" style-ref="comment">
+      <start>#</start>
+      <end>$</end>
+    </context>
+
+    <context id="keyword-decl" style-ref="keyword-decl">
+      <keyword>declaration</keyword>
+    </context>
+    
+    <context id="keyword-rule" style-ref="keyword-rule">
+      <keyword>context</keyword>
+      <keyword>input</keyword>
+      <keyword>output</keyword>
+      <keyword>internal</keyword>
+      <keyword>scope</keyword>
+      <keyword>depends\s+on</keyword>
+      <keyword>includes</keyword>
+      <keyword>collection</keyword>
+      <keyword>content</keyword>
+      <keyword>optional</keyword>
+      <keyword>structure</keyword>
+      <keyword>enumeration</keyword>
+      <keyword>rule</keyword>
+      <keyword>under\s+condition</keyword>
+      <keyword>condition</keyword>
+      <keyword>data</keyword>
+      <keyword>consequence</keyword>
+      <keyword>fulfilled</keyword>
+      <keyword>equals</keyword>
+      <keyword>assertion</keyword>
+      <keyword>definition</keyword>
+      <keyword>state</keyword>
+      <keyword>label</keyword>
+      <keyword>exception</keyword>
+    </context>
+
+    <context id="keyword-expr" style-ref="keyword-expr">
+      <keyword>match</keyword>
+      <keyword>with\s+pattern</keyword>
+      <keyword>fixed</keyword>
+      <keyword>by</keyword>
+      <keyword>decreasing</keyword>
+      <keyword>increasing</keyword>
+      <keyword>varies</keyword>
+      <keyword>with</keyword>
+      <keyword>we\s+have</keyword>
+      <keyword>let</keyword>
+      <keyword>in</keyword>
+      <keyword>such\s+that</keyword>
+      <keyword>exists</keyword>
+      <keyword>for</keyword>
+      <keyword>all</keyword>
+      <keyword>of</keyword>
+      <keyword>if</keyword>
+      <keyword>then</keyword>
+      <keyword>else</keyword>
+      <keyword>initial</keyword>
+    </context>
+
+    <context id="primitive" style-ref="primitive">
+      <keyword>integer</keyword>
+      <keyword>boolean</keyword>
+      <keyword>date</keyword>
+      <keyword>duration</keyword>
+      <keyword>money</keyword>
+      <keyword>text</keyword>
+      <keyword>decimal</keyword>
+      <keyword>number</keyword>
+      <keyword>sum</keyword>
+    </context>
+
+    <context id="operator" style-ref="keyword-expr">
+      <!--for proper matching, do not allow unnecessary spaces in the following regex-->
+      <match>\.|\s((&lt;=|&lt;|&gt;=|&gt;|\+|-|\*|\/)(\$|\@|\^|\.|)?|not|or|xor|and|year|month|day|!=|=|--)(\s|$)</match>
+    </context>
+
+    <!-- Snake-case identifiers-->
+    <context id="sc_id" style-ref="sc_id">
+      <match>\b[[:lower:]]([[:lower:]]|[[:upper:]]|[0-9]|_|\')*\b</match>
+    </context>
+
+    <!-- Camel-case identifiers-->
+    <context id="cc_id" style-ref="cc_id">
+      <match>\b[[:upper:]]([[:lower:]]|[[:upper:]]|[0-9]|_|\')*\b</match>
+    </context>
+    
+    <!--main context-->
+    <context id="catala">
+      <include>
+	<context ref="codeblock"/>
+      </include>
+    </context>
+    
+  </definitions>
+</language>

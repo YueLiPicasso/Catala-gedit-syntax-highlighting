@@ -1,0 +1,169 @@
+# Fictional Income Tax Rules
+
+## Article 1
+
+The income tax for an individual is defined 
+as a fixed percentage of the individual's 
+income over a year.
+
+```catala-metadata
+declaration structure Individual :
+  data income             content money
+  data number_of_children content integer
+# like OCaml record type
+	
+declaration enumeration TaxCredit :
+  -- NoTaxCredit
+  -- ChildrenTaxCredit content integer  
+# like OCaml algebraic data type
+
+declaration scope IncomeTaxComputation :
+  input    individual       content Individual
+  internal fixed_percentage content decimal
+  output   income_tax       content money
+  
+# like OCaml function type declaration
+# a variable can be both input and output
+```
+
+```catala
+scope IncomeTaxComputation :
+  definition income_tax equals
+  individual.income *$ fixed_percentage
+  # *$ is multiplication (*) with money ($)
+```
+
+## Article 2
+
+The fixed percentage mentioned at article 1 is equal to 20 %.
+
+```catala
+# distributed definition
+scope IncomeTaxComputation:
+  definition fixed_percentage equals 20 %
+```
+
+## Article 3
+
+If the individual is in charge of 2 or more 
+children, then the fixed percentage mentioned 
+at article 1 is equal to 15 %.
+
+```catala
+scope IncomeTaxComputation :
+  definition fixed_percentage under condition
+    individual.number_of_children >= 2
+  consequence equals 15 %  
+```
+
+### Article 3 bis 
+
+The children eligible for application of article 3. 
+
+```catala
+# can I use catala-metadata here? 
+
+declaration scope Child :
+  input age                    content integer
+  output is_eligible_article_3 condition
+  # "condition" is like "content bool"
+  
+scope Child: 
+  rule is_eligible_article_3 under condition
+    age < 18
+  consequence fulfilled
+  # "rule" is like "define", but set conditions 
+  # to either true or false.
+  # fulfilled is like "equals true"
+```
+
+```catala-metadata
+declaration structure TwoBrackets:
+  data breakpoint content money
+  data rate1      content decimal
+  data rate2      content decimal
+  
+declaration scope TwoBracketsTaxComputation:
+  input brackets     content TwoBrackets
+  output tax_formula content money depends on money
+  # the output has a function type 
+```
+
+## Article 4
+
+The tax amount for a two-brackets computation is 
+equal to the amount of income in each bracket 
+multiplied by the rate of each bracket.
+
+```catala
+scope TwoBracketsTaxComputation:
+  definition tax_formula of income equals
+    # "income" is a formal parameter of the function
+    if income <=$ brackets.breakpoint then
+      income *$ brackets.rate1
+    else (
+      brackets.breakpoint *$ brackets.rate1 +$
+      (income -$ brackets.breakpoint) *$ 
+      brackets.rate2
+    )    
+```
+
+## Article 5
+
+For individuals whose income is greater than 
+$100,000, the income tax of article 1 is 40% 
+of the income above $100,000. Below $100,000, 
+the income tax is 20% of the income.
+
+```catala
+declaration scope NewIncomeTaxComputation:
+  two_brackets scope TwoBracketsTaxComputation
+  # add a subscope to context
+  input  individual content Individual
+  output income_tax content money
+  
+scope NewIncomeTaxComputation:
+  definition two_brackets.brackets equals    
+    TwoBrackets {
+    -- breakpoint : $100,000
+    -- rate1 : 20%
+    -- rate2 : 40% 
+    } 
+  # we have now provided the input to the subscope,
+  # which is then expected to return a function
+  definition income_tax equals 
+    two_brackets.tax_formula of individual.income
+```
+
+## Article 6
+
+Individuals earning less than $10,000 are exempted 
+of the income tax mentioned at article 1.
+
+```catala
+scope NewIncomeTaxComputation :
+ definition income_tax under condition
+   individual.income <=$ $10,000
+ consequence equals $0
+```
+
+## Tests
+
+```catala
+declaration scope Test1 :
+  tax_computation scope NewIncomeTaxComputation
+  output income_tax content money
+  
+scope Test1 :
+  definition tax_computation.individual equals
+    Individual {
+      -- income : $700,000 
+      # try also 7,000
+      -- number_of_children : 0
+    }  
+  definition income_tax equals 
+    tax_computation.income_tax 
+  assertion income_tax = $260,000 
+```
+
+
