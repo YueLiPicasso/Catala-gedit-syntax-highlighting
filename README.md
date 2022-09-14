@@ -13,7 +13,7 @@ restart GEdit.
 ~/.local/share/gtksourceview-4/language-specs
 ```
 
-I use [test.catala_en](YCatala.catala_en) as a test file.
+I use [test.catala_en](test.catala_en) as a test file.
 
 ## Reference
 
