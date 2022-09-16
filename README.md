@@ -1,9 +1,9 @@
 # GEdit syntax highlighting for Catala
 
-This is to support syntax highlighting of English Catala code in GEdit. 
+This is to support syntax highlighting of English and Chinese Catala code in GEdit. 
 
-The code is modelled after the  [Catala syntax highlighting code for the iro compiler](https://github.com/CatalaLang/catala/blob/e7c3ef604e1862dee82a1395ee2a1ea6beb5f9a2/syntax_highlighting/en/catala_en.iro).  
-
+Currently Chinese is not yet supported by Catala. The provided Chinese Catala syntax-highlighting
+plug-in allows experimenting with Chinese Catala syntax design.  
 
 ## How to use
 
@@ -13,11 +13,13 @@ restart GEdit.
 ~/.local/share/gtksourceview-4/language-specs
 ```
 
-I use [test.catala_en](test.catala_en) as a test file.
+I use [test.catala_en](test.catala_en) and [test.catala_cn](test.catala_cn) as test files for English and Chinese versions of the syntax respectively.
 
 ## Reference
 
-Here I collect further resources which helped me write the code.
+Here I collect further resources which helped me.
+
+The code is modelled after the  [Catala syntax highlighting code for the iro compiler](https://github.com/CatalaLang/catala/blob/e7c3ef604e1862dee82a1395ee2a1ea6beb5f9a2/syntax_highlighting/en/catala_en.iro).  
 
 
 The posts below basically say that to provide gedit syntax highlighting support we simply need to write a XML file specifiying the syntax and put it under the gedit syntax highlighting directory.
