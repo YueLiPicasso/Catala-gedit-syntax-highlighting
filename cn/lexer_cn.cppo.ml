@@ -217,8 +217,8 @@
 
 (* Directives *)
 
-#define MS_LAW_INCLUDE "\xe5\x8c\x85\xe5\x90\xab"
-#define MR_LAW_INCLUDE 0x5305, 0x542b
+#define MS_LAW_INCLUDE "\xe5\xbc\x95\xe7\x94\xa8"
+#define MR_LAW_INCLUDE 0x5f15, 0x7528
 
 #define MX_AT_PAGE \
    '@', Star hspace, "p.", Star hspace, Plus digit -> \

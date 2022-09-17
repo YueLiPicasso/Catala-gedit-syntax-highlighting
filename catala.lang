@@ -38,184 +38,255 @@
       <start>#</start>
       <end>$</end>
     </context>
+    
+    <!--Comments below: macro names in lexer_xx.cppo.ml -->
 
     <context id="keyword-decl" style-ref="keyword-decl">
+    
+      <!--DECLARATION-->
       <keyword>declaration</keyword>
       <keyword>声明</keyword>
+      
     </context>
     
     <context id="keyword-rule" style-ref="keyword-rule">
-      <!--This is macro name in lexer_xx.cppo.ml -->
-      <!--context-->
-      <keyword>context</keyword>
-      <keyword>上下文</keyword>
-      <!--input-->
-      <keyword>input</keyword>
-      <keyword>输入</keyword>
-      <!--output-->
-      <keyword>output</keyword>
-      <keyword>输出</keyword>
-      <!--internal-->
-      <keyword>internal</keyword>
-      <keyword>内部</keyword>
+      
       <!--SCOPE-->
-      <keyword>语境</keyword> 
       <keyword>scope</keyword>
-      <!--depends on-->
+      <keyword>语境</keyword> 
+      
+      <!--CONSEQUENCE-->
+      <keyword>consequence</keyword>
+      <keyword>结果</keyword>
+      
+      <!--DATA-->
+      <keyword>data</keyword>
+      <keyword>数据</keyword>
+      
+      <!--DEPENDS-->
       <keyword>depends\s+on</keyword>
       <keyword>取决于</keyword>
-      <!--includes-->
-      <keyword>includes</keyword>
-      <keyword>包含</keyword>
-      <!--collection-->
+      
+      <!--CONTEXT-->
+      <keyword>context</keyword>
+      <keyword>上下文</keyword>
+      
+      <!--COLLECTION-->
       <keyword>collection</keyword>
       <keyword>集合</keyword>
-      <!--content-->
+      
+      <!--CONTAINS-->
+      <keyword>contains</keyword>
+      <keyword>含有</keyword>
+      
+      <!--ENUM-->
+      <keyword>enumeration</keyword>
+      <keyword>枚举</keyword>
+      
+      <!--FILLED-->
+      <keyword>fulfilled</keyword>
+      <keyword>满足</keyword>
+      
+      <!--DEFINITION-->
+      <keyword>definition</keyword>
+      <keyword>定义</keyword>
+      
+      <!--STATE-->
+      <keyword>state</keyword>
+      <keyword>状态</keyword>
+      
+      <!--LABEL-->
+      <keyword>label</keyword>
+      <keyword>标记</keyword>
+
+      <!--EXCEPTION-->
+      <keyword>exception</keyword>
+      <keyword>例外</keyword>
+      
+      <!--DEFINED_AS-->
+      <keyword>equals</keyword>
+      <keyword>等于</keyword>
+      
+      <!--UNDER_CONDITION-->
+      <keyword>under\s+condition</keyword>
+      <keyword>在条件下</keyword>
+      
+      <!--CONDITION-->
+      <keyword>condition</keyword>
+      <keyword>条件</keyword>
+      
+      <!--CONTENT-->
       <keyword>content</keyword>
       <keyword>内容</keyword>
+      
+      <!--STRUCT-->
+      <keyword>structure</keyword>
+      <keyword>结构</keyword>
+
+      <!--ASSERTION-->
+      <keyword>assertion</keyword>
+      <keyword>声称</keyword>
+      
+      <!--RULE-->
+      <keyword>rule</keyword>
+      <keyword>规定</keyword> 
+      
+      <!--INPUT-->
+      <keyword>input</keyword>
+      <keyword>输入</keyword>
+      
+      <!--OUTPUT-->
+      <keyword>output</keyword>
+      <keyword>输出</keyword>
+      
+      <!--INTERNAL-->
+      <keyword>internal</keyword>
+      <keyword>内部</keyword>
+      
+      <!--LAW_INCLUDE-->
+      <keyword>Include</keyword>
+      <keyword>引用</keyword>
+      
       <!--optional-->
       <keyword>optional</keyword>
       <keyword>可选</keyword>
-      <!--structure-->
-      <keyword>structure</keyword>
-      <keyword>结构</keyword>
-      <!--enumeration-->
-      <keyword>enumeration</keyword>
-      <keyword>枚举</keyword>
-      <!--rule-->
-      <keyword>rule</keyword>
-      <keyword>规定</keyword> 
-      <!--under condition-->
-      <keyword>under\s+condition</keyword>
-      <keyword>在条件下</keyword>
-      <!--condition-->
-      <keyword>condition</keyword>
-      <keyword>条件</keyword>
-      <!--data-->
-      <keyword>data</keyword>
-      <keyword>数据</keyword>
-      <!--consequence-->
-      <keyword>consequence</keyword>
-      <keyword>结果</keyword>
-      <!--fulfilled-->
-      <keyword>fulfilled</keyword>
-      <keyword>满足</keyword>
-      <!--equals-->
-      <keyword>equals</keyword>
-      <keyword>等于</keyword>
-      <!--assertion-->
-      <keyword>assertion</keyword>
-      <keyword>声称</keyword>
-      <!--definition-->
-      <keyword>definition</keyword>
-      <keyword>定义</keyword>
-      <!--state-->
-      <keyword>state</keyword>
-      <keyword>状态</keyword>
-      <!--label-->
-      <keyword>label</keyword>
-      <keyword>标记</keyword>
-      <!--exception-->
-      <keyword>exception</keyword>
-      <keyword>例外</keyword> 
+       
     </context>
 
     <context id="keyword-expr" style-ref="keyword-expr">
-      <!--match-->
-      <keyword>match</keyword>
-      <keyword>匹配</keyword>
-      <!--with pattern-->
-      <keyword>with\s+pattern</keyword>
-      <keyword>和模式</keyword>
-      <!--fixed-->
-      <keyword>fixed</keyword>
-      <keyword>固定</keyword>
-      <!--by-->
-      <keyword>被</keyword> 
-      <keyword>by</keyword>
-      <!--decreasing-->
+    
+      <!--DECREASING-->
       <keyword>decreasing</keyword>
       <keyword>下降</keyword>
-      <!--increasing-->
+      
+      <!--INCREASING-->
       <keyword>increasing</keyword>
       <keyword>上升</keyword>
-      <!--varies-->
-      <keyword>varies</keyword>
-      <keyword>变动</keyword>
-      <!--with-->
-      <keyword>with</keyword>
-      <keyword>连同</keyword>
-      <!--we have-->
-      <keyword>we\s+have</keyword>
-      <keyword>我们有</keyword>
-      <!--let-->
-      <keyword>let</keyword>
-      <keyword>让</keyword>
-      <!--in-->
-      <keyword>in</keyword>
-      <keyword>然后</keyword>
-      <!--such that-->
-      <keyword>such\s+that</keyword>
-      <keyword>要求</keyword>
-      <!--exists-->
-      <keyword>exists</keyword>
-      <keyword>存在</keyword>
-      <!--for-->
-      <keyword>for</keyword>
-      <keyword>对于</keyword>
-      <!--all-->
-      <keyword>all</keyword>
-      <keyword>所有</keyword>
-      <!--of-->
+      
+      <!--OF-->
       <keyword>of</keyword>
       <keyword>用于</keyword>
-      <!--if-->
+      
+      <!--MATCH-->
+      <keyword>match</keyword>
+      <keyword>匹配</keyword>
+      
+      <!--WITH-->
+      <keyword>with\s+pattern</keyword>
+      <keyword>和模式</keyword>
+      
+      <!--IF-->
       <keyword>if</keyword>
       <keyword>如果</keyword>
-      <!--then-->
+      
+      <!--THEN-->
       <keyword>then</keyword>
       <keyword>那么</keyword>
-      <!--else-->
+      
+      <!--ELSE-->
       <keyword>else</keyword>
       <keyword>否则</keyword>
-      <!--initial-->
+      
+      <!--VARIES-->
+      <keyword>varies</keyword>
+      <keyword>变动</keyword>
+      
+      <!--WITH_V-->
+      <keyword>with</keyword>
+      <keyword>连同</keyword>
+      
+      <!--FOR-->
+      <keyword>for</keyword>
+      <keyword>对于</keyword>
+      
+      <!--ALL-->
+      <keyword>all</keyword>
+      <keyword>所有</keyword>
+      
+      <!--WE_HAVE-->
+      <keyword>we\s+have</keyword>
+      <keyword>我们有</keyword>
+      
+      <!--FIXED-->
+      <keyword>fixed</keyword>
+      <keyword>固定</keyword>
+      
+      <!--BY-->
+      <keyword>被</keyword> 
+      <keyword>by</keyword>
+      
+      <!--LET-->
+      <keyword>let</keyword>
+      <keyword>让</keyword>
+      
+      <!--EXISTS-->
+      <keyword>exists</keyword>
+      <keyword>存在</keyword>
+      
+      <!--IN-->
+      <keyword>in</keyword>
+      <keyword>然后</keyword>
+      
+      <!--SUCH-->
+      <keyword>such</keyword>
+      <keyword>如此</keyword>
+      
+      <!--THAT-->
+      <keyword>that</keyword>
+      <keyword>从而</keyword>
+      
+      <!--INIT-->
       <keyword>initial</keyword>
       <keyword>初始</keyword> 
     </context>
 
     <context id="primitive" style-ref="primitive">
-      <!--integer-->
+    
+      <!--INTEGER-->
       <keyword>integer</keyword>
       <keyword>整数</keyword>
-      <!--boolean-->
-      <keyword>boolean</keyword>
-      <keyword>真值</keyword>
-      <!--date-->
-      <keyword>date</keyword>
-      <keyword>日期</keyword>
-      <!--duration-->
-      <keyword>duration</keyword>
-      <keyword>时长</keyword>
-      <!--monney-->
+      
+      <!--MONEY-->
       <keyword>money</keyword>
       <keyword>货币</keyword>
-      <!--text-->
+      
+      <!--TEXT-->
       <keyword>text</keyword>
       <keyword>文本</keyword>
-      <!--decimal-->
+      
+      <!--DECIMAL-->
       <keyword>decimal</keyword>
       <keyword>小数</keyword>
-      <!--number-->
+      
+      <!--DATE-->
+      <keyword>date</keyword>
+      <keyword>日期</keyword>
+      
+      <!--DURATION-->
+      <keyword>duration</keyword>
+      <keyword>时长</keyword>
+      
+      <!--BOOLEAN-->
+      <keyword>boolean</keyword>
+      <keyword>真值</keyword>
+      
+      <!--SUM-->
+      <keyword>sum</keyword>
+      <keyword>和值</keyword>
+      
+      <!--WILDCARD-->
+      <keyword>anything</keyword>
+      <keyword>任何</keyword>
+      
+      <!--CARDINAL--> 
       <keyword>number</keyword>
       <keyword>数字</keyword>
-      <!--sum-->
-      <keyword>sum</keyword>
-      <keyword>和值</keyword> 
+      
     </context>
 
     <context id="operator" style-ref="keyword-expr">
       <!--for proper matching, do not allow unnecessary spaces in the following regex-->
-      <match>\.|\s((&lt;=|&lt;|&gt;=|&gt;|\+|-|\*|\/)(￥|\$|\@|\^|\.|)?|not|or|xor|and|year|month|day|!=|=|--)(\s|$)</match>
+      <match>\.|\s((&lt;=|&lt;|&gt;=|&gt;|\+|-|\*|\/)(￥|\$|\@|\^|\.|)?|not|or|xor|and|year|month|day|maximum|minimum|filter|map|true|false|!=|=|--)(\s|$)</match>
     </context>
 
     <!-- Snake-case identifiers-->
