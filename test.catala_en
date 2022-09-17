@@ -147,7 +147,7 @@ scope NewIncomeTaxComputation :
  consequence equals $0
 ```
 
-## Tests
+### Tests
 
 ```catala
 declaration scope Test1 :
@@ -166,4 +166,133 @@ scope Test1 :
   assertion income_tax = $260,000 
 ```
 
+### Resolving the conflict 
+
+There are two definitions of income_tax: one is by 
+the two_brackets function. the other is set to zero. 
+Humans know the set-to-zero takes precedence but for
+computer this needs to be explicit. 
+
+```catala
+declaration scope NewIncomeTaxComputationFixed:
+  two_brackets scope TwoBracketsTaxComputation
+  input individual content Individual
+  output tax_formula content money depends on money
+  context output income_tax content money
+  # The output type of this function is not fixed !
+
+scope NewIncomeTaxComputationFixed :
+  definition two_brackets.brackets equals    
+    TwoBrackets {
+    -- breakpoint : $100,000
+    -- rate1 : 20%
+    -- rate2 : 40% 
+    } 
+  definition tax_formula of income equals
+    two_brackets.tax_formula of income
+
+```
+Having specified the first output which is the 
+tax_formula, now we show the exception codes that
+define the second output. Why bother the first output?
+
+```catala
+scope NewIncomeTaxComputationFixed :
+  # We provide a labelled definition so that we can
+  # later on add exceptions to it.
+  label article_5
+  definition income_tax equals 
+  two_brackets.tax_formula of individual.income
+  # Now we introduce the first exception 
+  exception article_5
+  definition income_tax under condition
+    individual.income <=$ $10,000
+  consequence equals $0
+```
+### Article 6 bis
+
+Individuals with 7 children or more are exempted of the income tax mentioned
+at article 1.
+
+```catala
+scope NewIncomeTaxComputationFixed:
+  # one more exception
+  exception article_5
+  definition income_tax under condition 
+    individual.number_of_children >= 7
+  consequence equals $0
+  
+declaration scope Test2:
+  tax_computation scope NewIncomeTaxComputationFixed
+  output income_tax content money
+  
+scope Test2 :
+  definition tax_computation.individual equals
+  Individual {
+  -- income : $4,000
+  -- number_of_children : 6
+  }
+  definition income_tax equals
+  tax_computation.income_tax
+  assertion income_tax = $0
+  # omitting the $ sign from $0 causes Catala internal
+  # error without useful debugging info for the user.  
+```
+
+## Article 7 
+
+The justice system delivers fines to individuals when they committed an offense.
+The fines are determined based on the amount of taxes paid by the individual.
+The more taxes the invidual pays, the higher the fine. However, the determination
+of the amount of taxes paid by an individual in this context shall include
+a flat tax fee of $500 for individuals earning less than $10,000.
+
+```catala
+# We now compute the basis for determining the 
+# fine, which is actually the income tax, with 
+# the  exception that people who earn less than 
+# $10,000 how are considered to have a flat tax
+# of $500.  
+
+declaration scope BasisForFineDetermination:
+  tax_computation scope NewIncomeTaxComputationFixed
+  input individual content Individual
+  output basis_for_fine content money
+  
+scope BasisForFineDetermination :  
+  definition tax_computation.individual equals
+    individual
+  definition basis_for_fine equals
+    tax_computation.income_tax
+  definition tax_computation.income_tax under condition
+    individual.income <=$ $10,000
+  consequence equals $500
+  # The "context output" is alias for "input output" 
+  # but this does not has the relational sense; rather,
+  # the "input output" variable permits a by-pass of
+  # of the usual computing routine so that the result
+  # can be directed plugged by a certain calling scope.
+```
+
+### Test3
+
+```catala
+declaration scope Test3:
+  basis_of_fine scope BasisForFineDetermination
+  output fine_basis content money
+  
+scope Test3:
+  definition basis_of_fine.individual equals
+  Individual {
+  -- income : $100,000
+  -- number_of_children : 5
+  } 
+  definition fine_basis equals
+   basis_of_fine.basis_for_fine
+  assertion fine_basis = $20,000 
+  # the number of children is irrelevant to 
+  # determining the basis of fine when it concerns 
+  # people earning less than $10,000. For people
+  # who earn more, this number does matter.  
+```
 

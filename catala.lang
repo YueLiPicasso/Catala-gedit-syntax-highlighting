@@ -45,6 +45,7 @@
     </context>
     
     <context id="keyword-rule" style-ref="keyword-rule">
+      <!--This is macro name in lexer_xx.cppo.ml -->
       <!--context-->
       <keyword>context</keyword>
       <keyword>上下文</keyword>
@@ -57,7 +58,7 @@
       <!--internal-->
       <keyword>internal</keyword>
       <keyword>内部</keyword>
-      <!--scope-->
+      <!--SCOPE-->
       <keyword>语境</keyword> 
       <keyword>scope</keyword>
       <!--depends on-->
